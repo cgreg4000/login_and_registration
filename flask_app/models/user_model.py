@@ -3,7 +3,7 @@ from flask import flash
 import re
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-LETTER_REGEX = re.compile(r'^[a-zA-Z]')
+LETTER_REGEX = re.compile(r'^[a-zA-Z]+$')
 
 class User:
     def __init__(self, data):
@@ -42,6 +42,7 @@ class User:
             is_valid = False
         if not LETTER_REGEX.match(data['last_name']):
             flash("Only letters are allowed in last name.")
+            is_valid = False
         if not EMAIL_REGEX.match(data['email']):
             flash("Invalid email format.")
             is_valid = False
